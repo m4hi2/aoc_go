@@ -18,6 +18,26 @@ func part1(input string) int {
 
 	return MaxInt(caloriesElfCarrying)
 }
+func part2(input string) int {
+	elfs := strings.Split(input, "\n\n")
+	caloriesElfCarrying := make([]int, 0)
+
+	for _, elf := range elfs {
+		caloriesElfCarrying = append(caloriesElfCarrying, caloriesOnElf(elf))
+	}
+
+	sort.Ints(caloriesElfCarrying)
+
+	top3 := caloriesElfCarrying[len(caloriesElfCarrying)-3:]
+
+	var top3Total int
+
+	for _, i := range top3 {
+		top3Total = top3Total + i
+	}
+
+	return top3Total
+}
 
 func MaxInt(v []int) int {
 	sort.Ints(v)
@@ -46,5 +66,6 @@ func getFileContent(fileName string) string {
 }
 
 func main() {
-	fmt.Println(part1(getFileContent("input.txt")))
+	//fmt.Println(part1(getFileContent("input.txt")))
+	fmt.Println(part2(getFileContent("input.txt")))
 }
